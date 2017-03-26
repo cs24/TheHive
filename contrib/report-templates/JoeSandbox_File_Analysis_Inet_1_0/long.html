@@ -56,12 +56,15 @@
         </div>
         <div class="panel-body">
 
-            <div ng-if="content.signatures">
+            <div >
                 <h4>Signatures</h4>
                 <br>
-                <dl class="dl-horizontal" ng-repeat="l in content.signatures.signare">
+                <dl ng-if="content.signatures" class="dl-horizontal" ng-repeat="l in content.signatures.signare">
                     <dd>{{l}}<dd>
                 </dl>
+            </div>
+            <div ng-if="!content.signatures">
+                No suspicious signature reported
             </div>
             <hr>
             <div ng-if="content.contacted">
@@ -71,31 +74,36 @@
                     <div ng-if="k == 'domains'">
                         <h5>domains</h5>
                         <dl class="dl-horizontal" ng-repeat="e in v.domain">
-                            <dt>{{e.ip}}</dt>
-                            <dd>{{e.name}}</dd>
+                            <dt ng-if="e.ip">{{e.ip}}</dt>
+                            <dd ng-if="e.name">{{e.name}}</dd>
                         </dl>
                     </div>
 
                     <div ng-if="k === 'ips'">
                         <h5>IP addresses</h5>
-                        <dl  class="dl-horizontal" ng-repeat="ip in v.ip">
+                        <dl class="dl-horizontal" ng-repeat="ip in v.ip">
                             <dd>{{ip}}</dd>
                         </dl>
                     </div>
                 </div>
+                <hr>
             </div>
-            <hr>
-            <div ng-if="content.dropped.file">
+
+            <div >
                 <h4>Dropped files</h4>
                 <br>
-                <div ng-repeat="f in content.dropped.file">
+                <div ng-if="content.dropped.file" ng-repeat="f in content.dropped.file">
                     <h5>{{f.name}}</h5>
                     <dl class="dl-horizontal" ng-repeat="(k,v) in f" ng-if="k !== 'name'">
                         <dt>{{k}}</dt>
                         <dd>{{v}}</dt>
                     </dl>
                 </div>
+                <div ng-if="!content.dropped.file">
+                    No dropped file reported
+                </div>
             </div>
+
             <hr>
             <div ng-if="content.confidence">
                 <h4>Confidence</h4>

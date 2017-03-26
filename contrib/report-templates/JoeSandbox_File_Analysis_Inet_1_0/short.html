@@ -1,4 +1,4 @@
-<div ng-repeat="(k,v) in content">
+<span ng-repeat="(k,v) in content">
     <span ng-switch="k">
         <span ng-switch-when="clean" class="label label-success" ng-if="v === true">
             JSB:Clean
@@ -10,4 +10,4 @@
             JSB:Suspicious={{content.score}}/{{content.maxscore}}
         </span>
     </span>
-</div>
+</span>
